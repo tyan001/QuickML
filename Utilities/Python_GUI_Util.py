@@ -89,21 +89,39 @@ def multi_process_dataset(new_dir, labels, src_directories):
 
 
 if __name__ == '__main__':
-    new_dir = 'blck_ball_dir'  # the new directory name
-    blueball = 'Ball_Block_Proj/BlueBall/'
-    blueblock = 'Ball_Block_Proj/BlueBlock/'
-    greenball = 'Ball_Block_Proj/GreenBall/'
-    greenblock = 'Ball_Block_Proj/GreenBlock/'
-    redball = 'Ball_Block_Proj/RedBall/'
-    redblock = 'Ball_Block_Proj/RedBlock/'
-    yellowball = 'Ball_Block_Proj/YellowBall/'
-    yellowblock = 'Ball_Block_Proj/YellowBall/'
-    src = [blueball, blueblock, greenball, greenblock, redball, redblock, yellowball, yellowblock]
-    labels = ['blueball', 'blueblock', 'greenball', 'greenblock', 'redball', 'redblock', 'yellowball', 'yellowblock']
 
-    start_time = time.time()
+    new_dir = 'new_dir'
+    labels = ['rock', 'paper', 'scissor']
+    for i in range(len(labels)):
+        print(os.path.join(new_dir, 'training', labels[i]))
+        print(os.path.join(new_dir, 'testing', labels[i]))
+
+
+    new_dir = 'new_dir'  # the new directory name
+    paper_dir = 'rps/paper/'  # The next three are the source directories
+    rock_dir = 'rps/rock/'
+    scissor_dir = 'rps/scissors/'
+
+    src = [paper_dir, rock_dir, scissor_dir]
+    labels = ['rock', 'paper', 'scissor']
     make_dataset(new_dir, labels, src)
-    print("--- %s seconds ---" % (time.time() - start_time))
+
+
+    # new_dir = 'blck_ball_dir'  # the new directory name
+    # blueball = 'Ball_Block_Proj/BlueBall/'
+    # blueblock = 'Ball_Block_Proj/BlueBlock/'
+    # greenball = 'Ball_Block_Proj/GreenBall/'
+    # greenblock = 'Ball_Block_Proj/GreenBlock/'
+    # redball = 'Ball_Block_Proj/RedBall/'
+    # redblock = 'Ball_Block_Proj/RedBlock/'
+    # yellowball = 'Ball_Block_Proj/YellowBall/'
+    # yellowblock = 'Ball_Block_Proj/YellowBall/'
+    # src = [blueball, blueblock, greenball, greenblock, redball, redblock, yellowball, yellowblock]
+    # labels = ['blueball', 'blueblock', 'greenball', 'greenblock', 'redball', 'redblock', 'yellowball', 'yellowblock']
+    #
+    # start_time = time.time()
+    # make_dataset(new_dir, labels, src)
+    # print("--- %s seconds ---" % (time.time() - start_time))
 
     # new_dir = 'blck_ball_dir2'  # the new directory name
     # blueball = 'Ball_Block_Proj/BlueBall/'
