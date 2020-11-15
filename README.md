@@ -5,7 +5,7 @@ QuickML is a a Graphical User Interface (GUI) design to make Machine Learning mo
 Dependecies:
 * Tensorflow == 2.3.1 <br>
 * pyqt5 == 5.15.1 <br>
-* numpy == 1.19.4 <br>
+* numpy == 1.18.5 <br>
 
 Data was grabbed from this URL:
 http://www.laurencemoroney.com/rock-paper-scissors-dataset/
