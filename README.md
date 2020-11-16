@@ -6,6 +6,7 @@ Dependecies:
 * Tensorflow == 2.3.1 <br>
 * pyqt5 == 5.15.1 <br>
 * numpy == 1.18.5 <br>
+* pillow == 8.0.1
 
 Data was grabbed from this URL:
 http://www.laurencemoroney.com/rock-paper-scissors-dataset/
