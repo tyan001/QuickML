@@ -8,7 +8,8 @@ Dependecies:
 * pyqt5 == 5.15.1 <br>
 * numpy == 1.18.5 <br>
 * pillow == 8.0.1 <br>
-* matplotlib = 3.2.2
+* matplotlib == 3.2.2 <br>
+* scipy == 1.5.4
 
 Data was grabbed from this URL:
 http://www.laurencemoroney.com/rock-paper-scissors-dataset/
