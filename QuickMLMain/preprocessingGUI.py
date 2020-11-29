@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import preprocessingFunctions
+import QuickMLMain.preprocessingFunctions as preprocessingFunctions
 
 
 class Ui_MainWindow(object):

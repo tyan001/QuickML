@@ -1,4 +1,4 @@
-import Model as Model
+import QuickMLMain.Model as Model
 from PyQt5 import QtWidgets
 
 if __name__ == "__main__":
