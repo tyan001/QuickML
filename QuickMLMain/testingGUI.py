@@ -9,8 +9,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
-
+import tensorflow as tf
+import numpy as np
+import json
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -30,111 +31,111 @@ class Ui_MainWindow(object):
         self.labelLineEdit = QtWidgets.QLineEdit(self.centralwidget)
         self.labelLineEdit.setGeometry(QtCore.QRect(190, 40, 611, 20))
         self.labelLineEdit.setObjectName("labelLineEdit")
-        self.graphicsView = QtWidgets.QGraphicsView(self.centralwidget)
-        self.graphicsView.setGeometry(QtCore.QRect(10, 70, 250, 250))
-        self.graphicsView.setObjectName("graphicsView")
-        self.progressBar = QtWidgets.QProgressBar(self.centralwidget)
-        self.progressBar.setGeometry(QtCore.QRect(270, 80, 521, 23))
-        self.progressBar.setStyleSheet("QProgressBar {\n"
-                                       "    \n"
-                                       "    color: rgb(76, 32, 255);\n"
-                                       "    border-style: none;\n"
-                                       "    border-radius: 10px;\n"
-                                       "    text-align: center;\n"
-                                       "}\n"
-                                       "\n"
-                                       "QProgressBar::chunk {\n"
-                                       "    border-radius: 10px;\n"
-                                       "    background-color: qlineargradient(spread:pad, x1:0.00568182, y1:0.517, x2:1, y2:0.528, stop:0 rgba(0, 0, 100, 255), stop:1 rgba(0, 85, 255, 255));\n"
-                                       "}")
-        self.progressBar.setProperty("value", 24)
-        self.progressBar.setObjectName("progressBar")
+        self.progressBar1 = QtWidgets.QProgressBar(self.centralwidget)
+        self.progressBar1.setGeometry(QtCore.QRect(270, 80, 521, 23))
+        self.progressBar1.setStyleSheet("QProgressBar {\n"
+"    \n"
+"    color: rgb(76, 32, 255);\n"
+"    border-style: none;\n"
+"    border-radius: 10px;\n"
+"    text-align: center;\n"
+"}\n"
+"\n"
+"QProgressBar::chunk {\n"
+"    border-radius: 10px;\n"
+"    background-color: qlineargradient(spread:pad, x1:0.00568182, y1:0.517, x2:1, y2:0.528, stop:0 rgba(0, 0, 100, 255), stop:1 rgba(0, 85, 255, 255));\n"
+"}")
+        self.progressBar1.setProperty("value", 24)
+        self.progressBar1.setObjectName("progressBar1")
         self.predictBtn = QtWidgets.QPushButton(self.centralwidget)
         self.predictBtn.setGeometry(QtCore.QRect(100, 40, 75, 23))
         self.predictBtn.setObjectName("predictBtn")
-        self.progressBar_2 = QtWidgets.QProgressBar(self.centralwidget)
-        self.progressBar_2.setGeometry(QtCore.QRect(270, 120, 521, 23))
-        self.progressBar_2.setStyleSheet("QProgressBar {\n"
-                                         "    \n"
-                                         "    color: rgb(76, 32, 255);\n"
-                                         "    border-style: none;\n"
-                                         "    border-radius: 10px;\n"
-                                         "    text-align: center;\n"
-                                         "}\n"
-                                         "\n"
-                                         "QProgressBar::chunk {\n"
-                                         "    border-radius: 10px;\n"
-                                         "    background-color: qlineargradient(spread:pad, x1:0.00568182, y1:0.517, x2:1, y2:0.528, stop:0 rgba(0, 0, 100, 255), stop:1 rgba(0, 85, 255, 255));\n"
-                                         "}")
-        self.progressBar_2.setProperty("value", 24)
-        self.progressBar_2.setObjectName("progressBar_2")
-        self.progressBar_3 = QtWidgets.QProgressBar(self.centralwidget)
-        self.progressBar_3.setGeometry(QtCore.QRect(270, 160, 521, 23))
-        self.progressBar_3.setStyleSheet("QProgressBar {\n"
-                                         "    \n"
-                                         "    color: rgb(76, 32, 255);\n"
-                                         "    border-style: none;\n"
-                                         "    border-radius: 10px;\n"
-                                         "    text-align: center;\n"
-                                         "}\n"
-                                         "\n"
-                                         "QProgressBar::chunk {\n"
-                                         "    border-radius: 10px;\n"
-                                         "    background-color: qlineargradient(spread:pad, x1:0.00568182, y1:0.517, x2:1, y2:0.528, stop:0 rgba(0, 0, 100, 255), stop:1 rgba(0, 85, 255, 255));\n"
-                                         "}")
-        self.progressBar_3.setProperty("value", 24)
-        self.progressBar_3.setObjectName("progressBar_3")
-        self.progressBar_4 = QtWidgets.QProgressBar(self.centralwidget)
-        self.progressBar_4.setGeometry(QtCore.QRect(270, 200, 521, 23))
-        self.progressBar_4.setStyleSheet("QProgressBar {\n"
-                                         "    \n"
-                                         "    color: rgb(76, 32, 255);\n"
-                                         "    border-style: none;\n"
-                                         "    border-radius: 10px;\n"
-                                         "    text-align: center;\n"
-                                         "}\n"
-                                         "\n"
-                                         "QProgressBar::chunk {\n"
-                                         "    border-radius: 10px;\n"
-                                         "    background-color: qlineargradient(spread:pad, x1:0.00568182, y1:0.517, x2:1, y2:0.528, stop:0 rgba(0, 0, 100, 255), stop:1 rgba(0, 85, 255, 255));\n"
-                                         "}")
-        self.progressBar_4.setProperty("value", 24)
-        self.progressBar_4.setObjectName("progressBar_4")
-        self.progressBar_5 = QtWidgets.QProgressBar(self.centralwidget)
-        self.progressBar_5.setGeometry(QtCore.QRect(270, 240, 521, 23))
-        self.progressBar_5.setStyleSheet("QProgressBar {\n"
-                                         "    \n"
-                                         "    color: rgb(76, 32, 255);\n"
-                                         "    border-style: none;\n"
-                                         "    border-radius: 10px;\n"
-                                         "    text-align: center;\n"
-                                         "}\n"
-                                         "\n"
-                                         "QProgressBar::chunk {\n"
-                                         "    border-radius: 10px;\n"
-                                         "    background-color: qlineargradient(spread:pad, x1:0.00568182, y1:0.517, x2:1, y2:0.528, stop:0 rgba(0, 0, 100, 255), stop:1 rgba(0, 85, 255, 255));\n"
-                                         "}")
-        self.progressBar_5.setProperty("value", 24)
-        self.progressBar_5.setObjectName("progressBar_5")
-        self.progressBar_6 = QtWidgets.QProgressBar(self.centralwidget)
-        self.progressBar_6.setGeometry(QtCore.QRect(270, 280, 521, 23))
-        self.progressBar_6.setStyleSheet("QProgressBar {\n"
-                                         "    \n"
-                                         "    color: rgb(76, 32, 255);\n"
-                                         "    border-style: none;\n"
-                                         "    border-radius: 10px;\n"
-                                         "    text-align: center;\n"
-                                         "}\n"
-                                         "\n"
-                                         "QProgressBar::chunk {\n"
-                                         "    border-radius: 10px;\n"
-                                         "    background-color: qlineargradient(spread:pad, x1:0.00568182, y1:0.517, x2:1, y2:0.528, stop:0 rgba(0, 0, 100, 255), stop:1 rgba(0, 85, 255, 255));\n"
-                                         "}")
-        self.progressBar_6.setProperty("value", 24)
-        self.progressBar_6.setObjectName("progressBar_6")
+        self.progressBar2 = QtWidgets.QProgressBar(self.centralwidget)
+        self.progressBar2.setGeometry(QtCore.QRect(270, 120, 521, 23))
+        self.progressBar2.setStyleSheet("QProgressBar {\n"
+"    \n"
+"    color: rgb(76, 32, 255);\n"
+"    border-style: none;\n"
+"    border-radius: 10px;\n"
+"    text-align: center;\n"
+"}\n"
+"\n"
+"QProgressBar::chunk {\n"
+"    border-radius: 10px;\n"
+"    background-color: qlineargradient(spread:pad, x1:0.00568182, y1:0.517, x2:1, y2:0.528, stop:0 rgba(0, 0, 100, 255), stop:1 rgba(0, 85, 255, 255));\n"
+"}")
+        self.progressBar2.setProperty("value", 24)
+        self.progressBar2.setObjectName("progressBar2")
+        self.progressBar3 = QtWidgets.QProgressBar(self.centralwidget)
+        self.progressBar3.setGeometry(QtCore.QRect(270, 160, 521, 23))
+        self.progressBar3.setStyleSheet("QProgressBar {\n"
+"    \n"
+"    color: rgb(76, 32, 255);\n"
+"    border-style: none;\n"
+"    border-radius: 10px;\n"
+"    text-align: center;\n"
+"}\n"
+"\n"
+"QProgressBar::chunk {\n"
+"    border-radius: 10px;\n"
+"    background-color: qlineargradient(spread:pad, x1:0.00568182, y1:0.517, x2:1, y2:0.528, stop:0 rgba(0, 0, 100, 255), stop:1 rgba(0, 85, 255, 255));\n"
+"}")
+        self.progressBar3.setProperty("value", 24)
+        self.progressBar3.setObjectName("progressBar3")
+        self.progressBar4 = QtWidgets.QProgressBar(self.centralwidget)
+        self.progressBar4.setGeometry(QtCore.QRect(270, 200, 521, 23))
+        self.progressBar4.setStyleSheet("QProgressBar {\n"
+"    \n"
+"    color: rgb(76, 32, 255);\n"
+"    border-style: none;\n"
+"    border-radius: 10px;\n"
+"    text-align: center;\n"
+"}\n"
+"\n"
+"QProgressBar::chunk {\n"
+"    border-radius: 10px;\n"
+"    background-color: qlineargradient(spread:pad, x1:0.00568182, y1:0.517, x2:1, y2:0.528, stop:0 rgba(0, 0, 100, 255), stop:1 rgba(0, 85, 255, 255));\n"
+"}")
+        self.progressBar4.setProperty("value", 24)
+        self.progressBar4.setObjectName("progressBar4")
+        self.progressBar5 = QtWidgets.QProgressBar(self.centralwidget)
+        self.progressBar5.setGeometry(QtCore.QRect(270, 240, 521, 23))
+        self.progressBar5.setStyleSheet("QProgressBar {\n"
+"    \n"
+"    color: rgb(76, 32, 255);\n"
+"    border-style: none;\n"
+"    border-radius: 10px;\n"
+"    text-align: center;\n"
+"}\n"
+"\n"
+"QProgressBar::chunk {\n"
+"    border-radius: 10px;\n"
+"    background-color: qlineargradient(spread:pad, x1:0.00568182, y1:0.517, x2:1, y2:0.528, stop:0 rgba(0, 0, 100, 255), stop:1 rgba(0, 85, 255, 255));\n"
+"}")
+        self.progressBar5.setProperty("value", 24)
+        self.progressBar5.setObjectName("progressBar5")
+        self.progressBar6 = QtWidgets.QProgressBar(self.centralwidget)
+        self.progressBar6.setGeometry(QtCore.QRect(270, 280, 521, 23))
+        self.progressBar6.setStyleSheet("QProgressBar {\n"
+"    \n"
+"    color: rgb(76, 32, 255);\n"
+"    border-style: none;\n"
+"    border-radius: 10px;\n"
+"    text-align: center;\n"
+"}\n"
+"\n"
+"QProgressBar::chunk {\n"
+"    border-radius: 10px;\n"
+"    background-color: qlineargradient(spread:pad, x1:0.00568182, y1:0.517, x2:1, y2:0.528, stop:0 rgba(0, 0, 100, 255), stop:1 rgba(0, 85, 255, 255));\n"
+"}")
+        self.progressBar6.setProperty("value", 24)
+        self.progressBar6.setObjectName("progressBar6")
         self.loadModelBtn = QtWidgets.QToolButton(self.centralwidget)
         self.loadModelBtn.setGeometry(QtCore.QRect(100, 10, 75, 23))
         self.loadModelBtn.setObjectName("loadModelBtn")
+        self.label = drag_drop_label(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(10, 70, 250, 250))
+        self.label.setObjectName("label")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 823, 21))
@@ -147,9 +148,19 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        self.model = tf.keras.models.Sequential([])
+
         self.modelDirectoryBtn.clicked.connect(lambda: self.directory_dialog())
         self.labelDirectoryBtn.clicked.connect(lambda: self.directory_dialog_2())
         self.loadModelBtn.clicked.connect(lambda: self.loadModel())
+        self.predictBtn.clicked.connect(lambda: self.predict())
+
+        self.progressBar1.hide()
+        self.progressBar2.hide()
+        self.progressBar3.hide()
+        self.progressBar4.hide()
+        self.progressBar5.hide()
+        self.progressBar6.hide()
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -160,16 +171,97 @@ class Ui_MainWindow(object):
         self.loadModelBtn.setText(_translate("MainWindow", "Load Model"))
 
     def directory_dialog(self):
-        path_to_directory = QtWidgets.QFileDialog.getExistingDirectory(None, "Choose Directory")
+        path_to_directory, _ = QtWidgets.QFileDialog.getOpenFileName(None, "Choose File")
         self.modelLineEdit.setText(path_to_directory)
 
     def directory_dialog_2(self):
-        path_to_directory = QtWidgets.QFileDialog.getExistingDirectory(None, "Choose Directory")
+        path_to_directory, _ = QtWidgets.QFileDialog.getOpenFileName(None, "Choose File")
         self.labelLineEdit.setText(path_to_directory)
 
     def loadModel(self):
-       print('pp')
+        self.model = tf.keras.models.load_model(self.modelLineEdit.text())
+        self.model.summary()
 
+    def predict(self):
+        path = self.label.image_path
+        image = tf.keras.preprocessing.image.load_img(path, target_size=(150,150))
+        image = tf.keras.preprocessing.image.img_to_array(image)
+        predict = self.model.predict(np.expand_dims(image, axis= 0))
+        predict = np.around(predict, decimals=2)
+        print(predict)
+
+        with open(self.labelLineEdit.text(), 'r') as f:
+            labels = json.load(f)
+            labels = list(labels)
+        length = len(labels)
+        for i in range(length):
+
+            if i == 0:
+                self.progressBar1.show()
+                self.progressBar1.setValue(int(predict[0][i] * 100))
+                self.progressBar1.setFormat(labels[i])
+            elif i == 1:
+                self.progressBar2.show()
+                self.progressBar2.setValue(int(predict[0][i] * 100))
+                self.progressBar2.setFormat(labels[i])
+            elif i == 2:
+                self.progressBar3.show()
+                self.progressBar3.setValue(int(predict[0][i] * 100))
+                self.progressBar3.setFormat(labels[i])
+            elif i == 3:
+                self.progressBar4.show()
+                self.progressBar4.setValue(int(predict[0][i] * 100))
+                self.progressBar4.setFormat(labels[i])
+            elif i == 4:
+                self.progressBar5.show()
+                self.progressBar5.setValue(int(predict[0][i] * 100))
+                self.progressBar5.setFormat(labels[i])
+            elif i == 5:
+                self.progressBar6.show()
+                self.progressBar6.setValue(int(predict[0][i] * 100))
+                self.progressBar6.setFormat(labels[i])
+
+
+
+
+
+class drag_drop_label(QtWidgets.QLabel):
+
+    def __init__(self, QWidget):
+        super().__init__(QWidget)
+        self.image_path = ''
+        self.setAlignment(QtCore.Qt.AlignCenter)
+        self.setText('\n\n Drop Image Here \n\n')
+        self.setStyleSheet('''QLabel{border: 4px dashed #aaa}''')
+        self.setAcceptDrops(True)
+
+    def dragEnterEvent(self, event):
+        if event.mimeData().hasImage:
+            event.accept()
+        else:
+            event.ignore()
+
+    def dragMoveEvent(self, event):
+        if event.mimeData().hasImage:
+            event.accept()
+        else:
+            event.ignore()
+
+    def dropEvent(self, event):
+        if event.mimeData().hasImage:
+            event.setDropAction(QtCore.Qt.CopyAction)
+            file_path = event.mimeData().urls()[0].toLocalFile()
+
+            self.set_image(file_path)
+
+            event.accept()
+        else:
+            event.ignore()
+
+    def set_image(self, file_path):
+        self.image_path = file_path
+        Qpix = QtGui.QPixmap(file_path)
+        self.setPixmap(Qpix.scaled(225, 225))
 
 if __name__ == "__main__":
     import sys

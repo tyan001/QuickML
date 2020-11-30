@@ -30,12 +30,12 @@ class Ui_MainWindow(object):
         self.deleteAllBtn = QtWidgets.QPushButton(self.centralwidget)
         self.deleteAllBtn.setGeometry(QtCore.QRect(1030, 610, 75, 23))
         self.deleteAllBtn.setObjectName("deleteAllBtn")
+        self.saveBtn = QtWidgets.QPushButton(self.centralwidget)
+        self.saveBtn.setGeometry(QtCore.QRect(950, 640, 75, 23))
+        self.saveBtn.setObjectName("saveBtn")
         self.nextBtn = QtWidgets.QPushButton(self.centralwidget)
-        self.nextBtn.setGeometry(QtCore.QRect(950, 640, 75, 23))
+        self.nextBtn.setGeometry(QtCore.QRect(1030, 640, 75, 23))
         self.nextBtn.setObjectName("nextBtn")
-        self.cancelBtn = QtWidgets.QPushButton(self.centralwidget)
-        self.cancelBtn.setGeometry(QtCore.QRect(1030, 640, 75, 23))
-        self.cancelBtn.setObjectName("cancelBtn")
         self.listWidget = QtWidgets.QListWidget(self.centralwidget)
         self.listWidget.setGeometry(QtCore.QRect(10, 40, 461, 641))
         self.listWidget.setObjectName("listWidget")
@@ -60,8 +60,7 @@ class Ui_MainWindow(object):
         self.deleteBtn.clicked.connect(lambda: self.delete_class_dia())
         self.toolBtn.clicked.connect(lambda: self.directory_dialog())
         self.addDirectoryBtn.clicked.connect(lambda: self.add_directory())
-        self.nextBtn.clicked.connect(lambda: self.create_directory())
-        self.cancelBtn.clicked.connect(lambda: self.close_dialog())
+        self.saveBtn.clicked.connect(lambda: self.create_directory())
         self.deleteAllBtn.clicked.connect(lambda: self.delete_all())
 
     def retranslateUi(self, MainWindow):
@@ -71,8 +70,8 @@ class Ui_MainWindow(object):
         self.toolBtn.setText(_translate("MainWindow", "..."))
         self.deleteBtn.setText(_translate("MainWindow", "Delete"))
         self.deleteAllBtn.setText(_translate("MainWindow", "Delete All"))
+        self.saveBtn.setText(_translate("MainWindow", "Save"))
         self.nextBtn.setText(_translate("MainWindow", "Next"))
-        self.cancelBtn.setText(_translate("MainWindow", "Cancel"))
 
     def close_dialog(self):
         close_message = QtWidgets.QMessageBox()
@@ -129,10 +128,6 @@ class Ui_MainWindow(object):
 
     def create_directory(self):
         project_name, result = QtWidgets.QInputDialog.getText(MainWindow, "Project Name", "Input Project Name")
-        if result:
-            preprocessingFunctions.create_directory(project_name)
-        else:
-            print("fail")
 
         paths = []
         labels = []
@@ -140,9 +135,11 @@ class Ui_MainWindow(object):
             paths.append(self.listWidget.item(index).text())
             labels.append(self.listWidget_2.item(index).text())
 
-        preprocessingFunctions.copy_directory(paths, labels, project_name)
-        preprocessingFunctions.zip_files(project_name, project_name)
-        preprocessingFunctions.remove_directory(project_name)
+        print(labels)
+        print(paths)
+        print(project_name)
+       # preprocessingFunctions.copy_directory(paths, labels, project_name)
+        preprocessingFunctions.multi_process_dataset(project_name, labels, paths)
         self.finish_dialog()
 
 

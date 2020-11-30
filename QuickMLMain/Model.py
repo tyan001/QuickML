@@ -152,9 +152,6 @@ class Ui_MainWindow(object):
         self.RunButton = QtWidgets.QPushButton(self.gridLayoutWidget_2)
         self.RunButton.setObjectName("RunButton")
         self.gridLayout_2.addWidget(self.RunButton, 1, 1, 1, 1)
-        self.ShowModelButton = QtWidgets.QPushButton(self.gridLayoutWidget_2)
-        self.ShowModelButton.setObjectName("ShowModelButton")
-        self.gridLayout_2.addWidget(self.ShowModelButton, 1, 0, 1, 1)
         self.NextButton = QtWidgets.QPushButton(self.gridLayoutWidget_2)
         self.NextButton.setObjectName("NextButton")
         self.gridLayout_2.addWidget(self.NextButton, 0, 1, 1, 1)
@@ -337,10 +334,9 @@ class Ui_MainWindow(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
+        self.RunButton.setDisabled(True)
 
         # Push Buttons Functions
-        self.ShowModelButton.clicked.connect(lambda: self.test_func())
-        #self.ShowModelButton.clicked.connect(lambda: self.model_summary())
         self.ConvolutionAddButton.clicked.connect(lambda: self.add_layer(0))
         self.PoolingAddButton.clicked.connect(lambda: self.add_layer(1))
         self.DenseAddButton.clicked.connect(lambda: self.add_layer(2))
@@ -378,7 +374,6 @@ class Ui_MainWindow(object):
         self.EpochLine.setText(_translate("MainWindow", "10"))
         self.SaveButton.setText(_translate("MainWindow", "Save"))
         self.RunButton.setText(_translate("MainWindow", "Run"))
-        self.ShowModelButton.setText(_translate("MainWindow", "Show Model"))
         self.NextButton.setText(_translate("MainWindow", "Next"))
         self.HistoryButton.setText(_translate("MainWindow", "History"))
         self.KernelSizeLabel.setText(_translate("MainWindow", "Kernel Size"))
@@ -559,6 +554,7 @@ class Ui_MainWindow(object):
         self.model.compile(optimizer=opt, loss=self.LossComboBox.currentText(), metrics=['acc'])
         self.ModelSummary.append("Model has been compiled with {}, {}".format(self.OptimizerComboBox.currentText(),
                                                                               self.LossComboBox.currentText()))
+        self.RunButton.setDisabled(False)
 
     def directory_error_check(self):
         """
