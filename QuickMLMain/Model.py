@@ -348,6 +348,7 @@ class Ui_MainWindow(object):
         self.SaveButton.clicked.connect(lambda: self.save_model())
         # Push Buttons
 
+
         # Check Events #
         self.ConvolutionLineEdit.textChanged.connect(lambda: self.on_line_edit_changed(0))
         self.DenseLineEdit.textChanged.connect(lambda: self.on_line_edit_changed(1))
