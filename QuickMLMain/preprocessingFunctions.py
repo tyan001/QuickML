@@ -2,7 +2,6 @@ import os
 import multiprocessing as mp
 import shutil
 import random
-import time
 
 
 def make_data_directories(dir_name, labels):

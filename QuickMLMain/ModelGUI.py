@@ -550,6 +550,11 @@ class Ui_MainWindow(object):
         self.history = self.model.fit(train_generator, validation_data=testing_generator,
                                       epochs=int(self.EpochLine.text()), callbacks=[callback])
 
+
+    def history(self, history):
+        self.history = history
+
+
     def model_compile(self):
         opt = self.ret_optimizer(self.OptimizerComboBox.currentText())
         self.model.compile(optimizer=opt, loss=self.LossComboBox.currentText(), metrics=['acc'])
@@ -640,7 +645,6 @@ class Ui_MainWindow(object):
             self.quick_message_box('No History', 'There is no history of a model')
             return
 
-
     def save_model(self):
         save_path = QtWidgets.QFileDialog.getExistingDirectory(None, "Choose Directory")
         text, ok = QtWidgets.QInputDialog.getText(None, 'Save file name', 'What do you want to name the file')
@@ -704,8 +708,6 @@ class History(QtWidgets.QDialog):
         self.canvas.draw()
 
 
-
-
 class Epoch_Callback(tf.keras.callbacks.Callback):
 
     def __init__(self, total_epoch, progressBar=QtWidgets.QProgressBar):
@@ -715,32 +717,3 @@ class Epoch_Callback(tf.keras.callbacks.Callback):
     def on_epoch_end(self, epoch, logs={}):
         percent_done = int(((epoch + 1) / self.total_epoch) * 100)
         self.progressBar.setValue(percent_done)
-
-
-class Worker(QtCore.QRunnable):
-    '''
-    Worker thread
-
-    Inherits from QRunnable to handler worker thread setup, signals and wrap-up.
-
-    :param callback: The function callback to run on this worker thread. Supplied args and
-                     kwargs will be passed through to the runner.
-    :type callback: function
-    :param args: Arguments to pass to the callback function
-    :param kwargs: Keywords to pass to the callback function
-
-    '''
-
-    def __init__(self, fn, *args, **kwargs):
-        super(Worker, self).__init__()
-        # Store constructor arguments (re-used for processing)
-        self.fn = fn
-        self.args = args
-        self.kwargs = kwargs
-
-    @QtCore.pyqtSlot()
-    def run(self):
-        '''
-        Initialise the runner function with passed args, kwargs.
-        '''
-        self.fn(*self.args, **self.kwargs)

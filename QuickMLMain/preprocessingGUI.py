@@ -9,9 +9,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import QuickMLMain.preprocessingFunctions as preprocessingFunctions
+import preprocessingFunctions
 
-
+ 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -89,12 +89,14 @@ class Ui_MainWindow(object):
         self.lineEdit.setText(path_to_directory)
 
     def add_directory(self):
+
         path_to_directory = self.lineEdit.text()
         self.listWidget.addItem(path_to_directory)
         self.create_class_dia()
+        print('hello')
 
     def create_class_dia(self):
-        class_dia, result = QtWidgets.QInputDialog.getText(MainWindow, "Class Name", "Input Class Name")
+        class_dia, result = QtWidgets.QInputDialog.getText(None, "Class Name", "Input Class Name")
         if result:
             self.listWidget_2.addItem(class_dia)
 
@@ -127,7 +129,7 @@ class Ui_MainWindow(object):
         ret = finish_message.exec()
 
     def create_directory(self):
-        project_name, result = QtWidgets.QInputDialog.getText(MainWindow, "Project Name", "Input Project Name")
+        project_name, result = QtWidgets.QInputDialog.getText(None, "Project Name", "Input Project Name")
 
         paths = []
         labels = []

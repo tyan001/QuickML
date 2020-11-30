@@ -1,14 +1,17 @@
-from QuickMLMain.Model.GUI import Model
+import ModelGUI as Model
 from PyQt5 import QtWidgets
-from QuickMLMain import preprocessingGUI, testingGUI
+import preprocessingGUI, testingGUI
+
 
 def showModelGUI():
     MainWindow1.close()
     MainWindow2.show()
 
+
 def showTestingGUI():
     MainWindow2.close()
     MainWindow3.show()
+
 
 if __name__ == "__main__":
     import sys
@@ -27,6 +30,5 @@ if __name__ == "__main__":
     MainWindow3 = QtWidgets.QMainWindow()
     ui3 = testingGUI.Ui_MainWindow()
     ui3.setupUi(MainWindow3)
-
 
     sys.exit(app.exec_())
