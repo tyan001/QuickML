@@ -3,7 +3,7 @@
 block_cipher = None
 
 
-a = Analysis(['GUI.py'],
+a = Analysis(['C:\\Users\\alenw\\Desktop\\QuickML\\QuickMLMain\\GUI.py'],
              pathex=['C:\\Users\\alenw\\Desktop\\QuickML\\QuickMLMain'],
              binaries=[],
              datas=[],

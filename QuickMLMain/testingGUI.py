@@ -195,7 +195,7 @@ class Ui_MainWindow(object):
             self.model = tf.keras.models.load_model(self.modelLineEdit.text())
             self.model.summary()
         except Exception as e:
-            self.quick_message_box('The model file pass cannot be loaded', 'File error',
+            self.quick_message_box('File error','The model file pass cannot be loaded',
                                    icon=QtWidgets.QMessageBox.Question)
             print(e)
             return
@@ -208,7 +208,7 @@ class Ui_MainWindow(object):
                 labels = list(labels)
             length = len(labels)
         except Exception as e:
-            self.quick_message_box('There was a problem with the json file', 'File error',
+            self.quick_message_box('File error', 'There was a problem with the json file',
                                    icon=QtWidgets.QMessageBox.Question)
             return
 
@@ -219,7 +219,7 @@ class Ui_MainWindow(object):
             predict = self.model.predict(np.expand_dims(image, axis=0))
             predict = np.around(predict, decimals=2)
         except Exception as e:
-            self.quick_message_box('There was a problem with loading image to predict', 'File error',
+            self.quick_message_box('File error','There was a problem with loading image to predict',
                                    icon=QtWidgets.QMessageBox.Question)
             return
 
