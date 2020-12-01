@@ -15,6 +15,11 @@ import json
 
 
 class Ui_MainWindow(object):
+
+    def __init__(self):
+        self.icon = QtGui.QIcon()
+        self.icon.addPixmap(QtGui.QPixmap("Directory.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(823, 371)
@@ -151,6 +156,8 @@ class Ui_MainWindow(object):
 
         self.model = tf.keras.models.Sequential([])
 
+        self.modelDirectoryBtn.setIcon(self.icon)
+        self.labelDirectoryBtn.setIcon(self.icon)
         self.modelDirectoryBtn.clicked.connect(lambda: self.directory_dialog())
         self.labelDirectoryBtn.clicked.connect(lambda: self.directory_dialog_2())
         self.loadModelBtn.clicked.connect(lambda: self.loadModel())

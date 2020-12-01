@@ -13,6 +13,10 @@ import preprocessingFunctions
 
  
 class Ui_MainWindow(object):
+    def __init__(self):
+        self.icon = QtGui.QIcon()
+        self.icon.addPixmap(QtGui.QPixmap("Directory.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1130, 722)
@@ -57,6 +61,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        self.toolBtn.setIcon(self.icon)
         self.deleteBtn.clicked.connect(lambda: self.delete_class_dia())
         self.toolBtn.clicked.connect(lambda: self.directory_dialog())
         self.addDirectoryBtn.clicked.connect(lambda: self.add_directory())

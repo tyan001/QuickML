@@ -28,6 +28,8 @@ class Ui_MainWindow(object):
         self.target_size = (150, 150)
         self.history = None
         self.class_labels = []
+        self.icon = QtGui.QIcon()
+        self.icon.addPixmap(QtGui.QPixmap("Directory.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -337,6 +339,7 @@ class Ui_MainWindow(object):
         self.RunButton.setDisabled(True)
 
         # Push Buttons Functions
+        self.ToolButton.setIcon(self.icon)
         self.ConvolutionAddButton.clicked.connect(lambda: self.add_layer(0))
         self.PoolingAddButton.clicked.connect(lambda: self.add_layer(1))
         self.DenseAddButton.clicked.connect(lambda: self.add_layer(2))
