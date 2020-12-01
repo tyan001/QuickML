@@ -343,7 +343,6 @@ class Ui_MainWindow(object):
         self.ToolButton.clicked.connect(lambda: self.pick_folder())
         self.CompileButton.clicked.connect(lambda: self.model_compile())
         self.RunButton.clicked.connect(lambda: self.run_model())
-        # self.AuxButton.clicked.connect(lambda: self.test_func())
         self.HistoryButton.clicked.connect(lambda: self.show_history())
         self.SaveButton.clicked.connect(lambda: self.save_model())
         # Push Buttons
@@ -404,15 +403,7 @@ class Ui_MainWindow(object):
         self.DataDirectory.setText(QtCore.QDir.currentPath())
         #
 
-    def test_func(self):
-        #print(self.class_labels)
-        # with open('test.json', 'a') as f:
-        #     json.dump(self.class_labels,f)
-        #     f.write("\n")
-        with open('test.json') as f:
-            for line in f:
-                labels = json.loads(line)
-        print(labels)
+
 
     def model_summary(self):
         """
@@ -424,8 +415,9 @@ class Ui_MainWindow(object):
             self.model.summary(line_length=65, print_fn=lambda x: string_list.append(x))
             short_model_summary = "\n".join(string_list)
             self.ModelSummary.setText(short_model_summary)
-        except:
+        except Exception as e:
             self.quick_message_box('No model', 'There was no model to show', icon=QtWidgets.QMessageBox.Question)
+            print(e)
 
     def add_layer(self, layer):
         """
@@ -490,7 +482,8 @@ class Ui_MainWindow(object):
                 x = int(self.EpochLine.text())
                 if x > 50:
                     self.EpochLine.setText('50')
-        except:
+        except Exception as e:
+            print(e)
             return
 
 
@@ -641,8 +634,9 @@ class Ui_MainWindow(object):
             Window = History(history=self.history)
             Window.plot()
             Window.exec()
-        except:
+        except Exception as e:
             self.quick_message_box('No History', 'There is no history of a model')
+            print(e)
             return
 
     def save_model(self):

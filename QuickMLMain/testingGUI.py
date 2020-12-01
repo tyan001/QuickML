@@ -176,25 +176,46 @@ class Ui_MainWindow(object):
         self.modelLineEdit.setText(path_to_directory)
 
     def directory_dialog_2(self):
-        path_to_directory, _ = QtWidgets.QFileDialog.getOpenFileName(None, "Choose File")
-        self.labelLineEdit.setText(path_to_directory)
+        try:
+            path_to_directory, _ = QtWidgets.QFileDialog.getOpenFileName(None, "Choose File")
+            self.labelLineEdit.setText(path_to_directory)
+        except Exception as e:
+            self.quick_message_box('No file found', 'There was no file', icon=QtWidgets.QMessageBox.Question)
+            return
 
     def loadModel(self):
-        self.model = tf.keras.models.load_model(self.modelLineEdit.text())
-        self.model.summary()
+        try:
+            self.model = tf.keras.models.load_model(self.modelLineEdit.text())
+            self.model.summary()
+        except Exception as e:
+            self.quick_message_box('The model file pass cannot be loaded', 'File error',
+                                   icon=QtWidgets.QMessageBox.Question)
+            print(e)
+            return
 
     def predict(self):
-        path = self.label.image_path
-        image = tf.keras.preprocessing.image.load_img(path, target_size=(150, 150))
-        image = tf.keras.preprocessing.image.img_to_array(image)
-        predict = self.model.predict(np.expand_dims(image, axis=0))
-        predict = np.around(predict, decimals=2)
-        print(predict)
 
-        with open(self.labelLineEdit.text(), 'r') as f:
-            labels = json.load(f)
-            labels = list(labels)
-        length = len(labels)
+        try:
+            with open(self.labelLineEdit.text(), 'r') as f:
+                labels = json.load(f)
+                labels = list(labels)
+            length = len(labels)
+        except Exception as e:
+            self.quick_message_box('There was a problem with the json file', 'File error',
+                                   icon=QtWidgets.QMessageBox.Question)
+            return
+
+        try:
+            path = self.label.image_path
+            image = tf.keras.preprocessing.image.load_img(path, target_size=(150, 150))
+            image = tf.keras.preprocessing.image.img_to_array(image)
+            predict = self.model.predict(np.expand_dims(image, axis=0))
+            predict = np.around(predict, decimals=2)
+        except Exception as e:
+            self.quick_message_box('There was a problem with loading image to predict', 'File error',
+                                   icon=QtWidgets.QMessageBox.Question)
+            return
+
         for i in range(length):
 
             if i == 0:
@@ -221,6 +242,26 @@ class Ui_MainWindow(object):
                 self.progressBar6.show()
                 self.progressBar6.setValue(int(predict[0][i] * 100))
                 self.progressBar6.setFormat(labels[i])
+
+    @staticmethod
+    def quick_message_box(title='', message='', btn=QtWidgets.QMessageBox.Ok, icon=QtWidgets.QMessageBox.Warning):
+        """
+        Function to make quick message boxes for errors or warnings.
+        :param title: Title of the message box
+        :param message: The message that will be in the message box
+        :param btn: buttons you want on the message box,
+                    ex: QtWidgets.QMessageBox.Ok, (QtWidgets.QMessageBox.Yes|QtWidgets.QMessageBox.No)
+        :param icon: icon to put on message box
+                     QtWidgets.QMessageBox.Warning, QtWidgets.QMessageBox.Question, QtWidgets.QMessageBox.Question
+        :return:
+        """
+
+        msg_box = QtWidgets.QMessageBox()
+        msg_box.setWindowTitle(title)
+        msg_box.setText(message)
+        msg_box.setStandardButtons(btn)
+        msg_box.setIcon(icon)
+        msg_box.exec()
 
 
 class drag_drop_label(QtWidgets.QLabel):
