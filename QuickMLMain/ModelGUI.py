@@ -361,7 +361,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Model"))
         self.ToolButton.setText(_translate("MainWindow", "..."))
         self.OptimizerComboBox.setItemText(0, _translate("MainWindow", "Adam"))
         self.OptimizerComboBox.setItemText(1, _translate("MainWindow", "RMSProp"))
@@ -404,6 +404,7 @@ class Ui_MainWindow(object):
         self.DenseLineEdit.setText(_translate("MainWindow", "256"))
         #
         self.DataDirectory.setText(QtCore.QDir.currentPath())
+        MainWindow.setWindowIcon(QtGui.QIcon('QuickML.png'))
         #
 
 

@@ -70,13 +70,14 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Preprocessing"))
         self.addDirectoryBtn.setText(_translate("MainWindow", "+"))
         self.toolBtn.setText(_translate("MainWindow", "..."))
         self.deleteBtn.setText(_translate("MainWindow", "Delete"))
         self.deleteAllBtn.setText(_translate("MainWindow", "Delete All"))
         self.saveBtn.setText(_translate("MainWindow", "Save"))
         self.nextBtn.setText(_translate("MainWindow", "Next"))
+        MainWindow.setWindowIcon(QtGui.QIcon('QuickML.png'))
 
     def close_dialog(self):
         close_message = QtWidgets.QMessageBox()

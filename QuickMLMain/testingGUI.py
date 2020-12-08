@@ -172,11 +172,12 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Model Testing"))
         self.modelDirectoryBtn.setText(_translate("MainWindow", "..."))
         self.labelDirectoryBtn.setText(_translate("MainWindow", "..."))
         self.predictBtn.setText(_translate("MainWindow", "Predict"))
         self.loadModelBtn.setText(_translate("MainWindow", "Load Model"))
+        MainWindow.setWindowIcon(QtGui.QIcon('QuickML.png'))
 
     def directory_dialog(self):
         path_to_directory, _ = QtWidgets.QFileDialog.getOpenFileName(None, "Choose File")
