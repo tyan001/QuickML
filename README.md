@@ -12,4 +12,5 @@ Dependecies:
 * scipy == 1.5.4
 
 Data was grabbed from this URL:
-http://www.laurencemoroney.com/rock-paper-scissors-dataset/
+http://www.laurencemoroney.com/rock-paper-scissors-dataset/ <br>
+Youtube Video: https://youtu.be/noOIyDSu86c
